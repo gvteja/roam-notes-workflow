@@ -25,7 +25,7 @@ jobs:
       
       - name: Setup dependencies
         run: |
-          pip install git+https://github.com/MatthieuBizien/roam-to-git.git
+          pip install git+https://github.com/gvteja/roam-to-git.git
       - name: Run backup
         run: |
           roam-to-git .

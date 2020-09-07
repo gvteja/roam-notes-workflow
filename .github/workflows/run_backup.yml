@@ -16,8 +16,8 @@ jobs:
       - name: Checkout notes repo
         uses: actions/checkout@v2
         with:
-          repository: ${{ secrets.targetRepo }}
-          token: ${{ secrets.roamPat }}
+          repository: ${{ secrets.TARGET_REPO }}
+          token: ${{ secrets.ROAM_PERSONAL_ACCESS_TOKEN }}
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
@@ -30,7 +30,7 @@ jobs:
         run: |
           roam-to-git .
         env:
-          ROAMRESEARCH_USER: ${{ secrets.roamEmail }}
-          ROAMRESEARCH_PASSWORD: ${{ secrets.roamPassword }}
-          ROAMRESEARCH_DATABASE: ${{ secrets.roamDatabase }}
+          ROAMRESEARCH_USER: ${{ secrets.ROAMRESEARCH_USER }}
+          ROAMRESEARCH_PASSWORD: ${{ secrets.ROAMRESEARCH_PASSWORD }}
+          ROAMRESEARCH_DATABASE: ${{ secrets.ROAMRESEARCH_DATABASE }}
           

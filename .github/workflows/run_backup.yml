@@ -43,4 +43,7 @@ jobs:
         run: |
           data=$(jq -n --arg dt "`date +%Y/%m/%d-%T`" '{lastSuccessTime: $dt}')
           echo $data
-          curl -d $data $secrets.CURL_ARGS
+          curl -d $data -X PUT -H "Content-Type: application/json" -H "x-apikey: $DS_KEY" $DS_URL
+        env:
+          DS_URL: ${{ secrets.DS_URL }}
+          DS_KEY: ${{ secrets.DS_KEY }}

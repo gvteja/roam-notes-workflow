@@ -30,6 +30,7 @@ jobs:
           pip install git+https://github.com/gvteja/roam-to-git.git
       
       - name: Run backup
+        id: backup
         continue-on-error: true
         run: |
           roam-to-git .
@@ -40,7 +41,7 @@ jobs:
           ROAMRESEARCH_DATABASE: ${{ secrets.ROAMRESEARCH_DATABASE }}
           
       - name: Status report
-        if: success()
+        if: ${{ (success() || failure()) && steps.backup.outcome == 'success' }}
         run: |
           data=$(jq -n --arg dt "`date +%Y/%m/%d-%T`" '{lastSuccessTime: $dt}')
           echo $data

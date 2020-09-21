@@ -33,6 +33,7 @@ jobs:
         continue-on-error: true
         run: |
           roam-to-git .
+          exit 2
         env:
           ROAMRESEARCH_USER: ${{ secrets.ROAMRESEARCH_USER }}
           ROAMRESEARCH_PASSWORD: ${{ secrets.ROAMRESEARCH_PASSWORD }}

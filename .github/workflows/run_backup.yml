@@ -19,6 +19,7 @@ jobs:
           repository: ${{ secrets.TARGET_REPO }}
           token: ${{ secrets.ROAM_PERSONAL_ACCESS_TOKEN }}
           ref: master
+      
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
@@ -27,7 +28,9 @@ jobs:
       - name: Setup dependencies
         run: |
           pip install git+https://github.com/gvteja/roam-to-git.git
+      
       - name: Run backup
+        continue-on-error: true
         run: |
           roam-to-git .
         env:
@@ -35,3 +38,7 @@ jobs:
           ROAMRESEARCH_PASSWORD: ${{ secrets.ROAMRESEARCH_PASSWORD }}
           ROAMRESEARCH_DATABASE: ${{ secrets.ROAMRESEARCH_DATABASE }}
           
+      - name: Status report
+        if: success()
+        run: |
+          curl hello

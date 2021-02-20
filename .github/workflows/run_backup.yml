@@ -27,13 +27,16 @@ jobs:
       
       - name: Setup dependencies
         run: |
+          wget -qO /tmp/jet.zip https://github.com/borkdude/jet/releases/download/v0.0.13/jet-0.0.13-linux-amd64.zip
+          unzip /tmp/jet.zip -d /tmp
+          sudo mv /tmp/jet /usr/local/bin/jet
           pip install git+https://github.com/gvteja/roam-to-git.git
       
       - name: Run backup
         id: backup
         continue-on-error: true
         run: |
-          roam-to-git .
+          roam-to-git -f markdown formatted json edn -- .
         env:
           ROAMRESEARCH_USER: ${{ secrets.ROAMRESEARCH_USER }}
           ROAMRESEARCH_PASSWORD: ${{ secrets.ROAMRESEARCH_PASSWORD }}
